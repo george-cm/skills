@@ -5,7 +5,48 @@ description: Use when pinning down domain terminology, establishing a shared lan
 
 # Domain Modeling
 
-Actively build and sharpen the project's domain model as you design. This is the *active* discipline  -  challenging terms, inventing edge-case scenarios, and writing the glossary and decisions down the moment they crystallise. (Merely *reading* `CONTEXT.md` for vocabulary is not this skill  -  that's a one-line habit any skill can do. This skill is for when you're changing the model, not just consuming it.)
+## Overview
+
+Maintain a living glossary of precise domain terms (`CONTEXT.md`) and a record of hard
+architectural decisions (`docs/adr/`). Capture them inline as they crystallise - not in batch afterward.
+
+**Core principle:** Merely reading `CONTEXT.md` for vocabulary is not this skill. This skill
+is for when you are changing the model, not just consuming it.
+
+## When to Use
+
+- Starting a new project or feature area with unclear terminology
+- A term is being used inconsistently or two people mean different things by it
+- An architectural decision is being made that is hard to reverse
+- Another skill calls for domain model maintenance
+
+## When NOT to Use
+
+- Just reading `CONTEXT.md` to pick up vocabulary - one-line habit, not this skill
+- Documenting implementation details or technical specs - `CONTEXT.md` is a glossary only
+- Recording every small decision - ADRs only for hard-to-reverse, surprising, real trade-offs
+
+## Quick Reference
+
+| Action | When | Key rule |
+|--------|------|----------|
+| Update `CONTEXT.md` | Term resolved in conversation | Inline, not batched |
+| Challenge a term | Conflicts with existing glossary | Call it out immediately |
+| Sharpen fuzzy language | Vague or overloaded term | Propose a single canonical term |
+| Create ADR | Hard to reverse + surprising + real trade-off | All 3 required |
+| Skip ADR | Easy to reverse, or obvious | Don't document the obvious |
+
+## Common Mistakes
+
+- **Treating `CONTEXT.md` as a spec or decision log** - it is a glossary and nothing else
+- **ADRs for easy-to-reverse decisions** - if you can just change it, don't file it
+- **Batching term updates** - capture the moment they crystallise, not at end of session
+- **Not challenging conflicting terminology** - let it slide once, it compounds
+- **General programming terms in `CONTEXT.md`** - only domain-specific concepts belong
+
+---
+
+Actively build and sharpen the project's domain model as you design. This is the *active* discipline - challenging terms, inventing edge-case scenarios, and writing the glossary and decisions down the moment they crystallise. (Merely *reading* `CONTEXT.md` for vocabulary is not this skill - that's a one-line habit any skill can do. This skill is for when you're changing the model, not just consuming it.)
 
 ## File structure
 

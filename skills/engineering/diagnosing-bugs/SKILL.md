@@ -5,6 +5,49 @@ description: Use when debugging hard bugs, intermittent failures, or performance
 
 # Diagnosing Bugs
 
+## Overview
+
+Build a tight, red-capable feedback loop before doing anything else. Every other phase
+consumes it. Without one, no amount of reading code or generating hypotheses will reliably
+find the bug.
+
+**Core principle:** If you catch yourself reading code to build a theory before the loop
+exists, stop. That is the exact failure this skill prevents.
+
+## When to Use
+
+- Hard bugs with no obvious cause visible in the diff
+- Intermittent or flaky failures
+- Performance regressions
+- Bugs that resist casual inspection
+
+## When NOT to Use
+
+- Obvious bug visible directly in the diff - just fix it, skip the phases
+- Already have a red-capable loop - jump straight to Phase 3
+- Mid-incident requiring immediate action - stabilise first (use thinking-ooda), diagnose after
+
+## Quick Reference
+
+| Phase | Goal | Gate to next phase |
+|-------|------|--------------------|
+| 1 - Feedback loop | Build tight, red-capable command | Named command; already run; goes red on this bug |
+| 2 - Reproduce + minimise | Watch it fail; shrink to smallest red repro | Every element load-bearing |
+| 3 - Hypothesise | 3-5 ranked, falsifiable hypotheses | List shown to user |
+| 4 - Instrument | One variable at a time per hypothesis | Hypothesis confirmed or ruled out |
+| 5 - Fix | Regression test first (correct seam only) | Loop goes green on original scenario |
+| 6 - Cleanup | Remove debug artifacts, post-mortem | All checklist items cleared |
+
+## Common Mistakes
+
+- **Skipping Phase 1** - jumping to hypothesis before a red-capable loop exists. No loop, no Phase 2.
+- **Accepting a flaky loop** - a 30-second flaky loop is barely better than no loop. Tighten it.
+- **Minimising too little** - leaving non-load-bearing elements in the repro bloats the hypothesis space.
+- **"Log everything and grep"** - explicitly banned. Tag targeted logs `[DEBUG-xxxx]`, grep the prefix at cleanup.
+- **Fixing the wrong bug** - loop must assert the user's exact symptom, not a nearby failure that happens to go red.
+
+---
+
 A discipline for hard bugs. Skip phases only when explicitly justified.
 
 When exploring the codebase, read `CONTEXT.md` (if it exists) to get a clear mental model of the relevant modules, and check ADRs in the area you're touching.
